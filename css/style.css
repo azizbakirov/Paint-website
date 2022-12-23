@@ -5,19 +5,22 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+  transition: all 1s ease;
+scroll-behavior: smooth;
 }
 body {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
+  background-image: url(/icons/Background-Pictures-Triple-Monitor-Wallpaper-Epic-Fields-.jpg);
+  /* background: rgb(2, 0, 36); */
+  /* background: linear-gradient(
     90deg,
     rgba(2, 0, 36, 1) 0%,
     rgba(9, 9, 121, 1) 35%,
     rgba(0, 212, 255, 1) 100%
-  );
+  ); */
 }
 .container {
   display: flex;
@@ -27,21 +30,24 @@ body {
   max-width: 1050px;
 }
 section {
-  background: white;
+  background-color: rgba(255, 255, 255, 0.11);
+  backdrop-filter: blur(5px);
 }
 .title {
   text-transform: uppercase;
 }
 .tools-board {
+  border-radius: 10px;
   width: 210px;
   padding: 15px 22px 0;
 }
 .tools-board .row {
+  color: white;
   margin-bottom: 20px;
 }
-.row .options{
-    list-style: none;
-    margin: 10px 0 0 5px;
+.row .options {
+  list-style: none;
+  margin: 10px 0 0 5px;
 }
 .row .options .option {
   display: flex;
@@ -52,105 +58,136 @@ section {
 .option:is(:hover, .active)img {
   filter: invert(17%) sepia(90%) saturate(3000%) hue-rotate(900deg)
     brightness(100%) contrast(100%);
-    
 }
-.option :where(span, label){
-    color: #5a6168;
-    cursor: pointer;
-    padding-left: 10px;
+.option :where(span, label) {
+  color: rgb(197, 197, 197);
+  cursor: pointer;
+  padding-left: 10px;
 }
-.option:is(:hover, .active) :where(span, label){
-    color: #4a98f7;
+.option:is(:hover, .active) :where(span, label) {
+  color: #4a98f7;
 }
-.option #fill-color{
-    cursor: pointer;
-    height: 14px;
-    width: 14px;
+.option #fill-color {
+  cursor: pointer;
+  height: 14px;
+  width: 14px;
 }
-#fill-color:checked ~ label{
-    color: #4a98f7;
+#fill-color:checked ~ label {
+  color: #4a98f7;
 }
-.option #size-slider{
-    width: 100%;
-    height: 5px;
-    margin-top: 10px;
+.option #size-slider {
+  width: 100%;
+  height: 5px;
+  margin-top: 10px;
 }
-.colors .options{
-    display: flex;
-    justify-content: space-between;
+.colors .options {
+  display: flex;
+  justify-content: space-between;
 }
-.colors .option{
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    margin-top: 3px;
-    position: relative;
+.colors .option {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  margin-top: 3px;
+  position: relative;
 }
-.colors .option:nth-child(1){
-    background-color: white;
-    border: 1px solid #bfbfbf;
+.colors .option:nth-child(1) {
+  background-color: white;
+  border: 1px solid #bfbfbf;
 }
-.colors .option:nth-child(2){
-    background-color: black;
+.colors .option:nth-child(2) {
+  background-color: black;
 }
-.colors .option:nth-child(3){
-    background-color: #e02020;
+.colors .option:nth-child(3) {
+  background-color: #e02020;
 }
-.colors .option:nth-child(4){
-    background-color: #6dd400;
+.colors .option:nth-child(4) {
+  background-color: #6dd400;
 }
-.colors .option:nth-child(5){
-    background-color: #4a98f7;
+.colors .option:nth-child(5) {
+  background-color: #4a98f7;
 }
-.colors .option.selected::before{
-    position: absolute;
-    content: '';
-    top: 50%;
-    left: 50%;
-    height: 12px;
-    width: 12px;
-    background: inherit;
-    border-radius: inherit;
-    border: 2px solid #fff;
-    transform: translate(-50%, -50%);
+.colors .option.selected::before {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  height: 12px;
+  width: 12px;
+  background: inherit;
+  border-radius: inherit;
+  border: 2px solid #fff;
+  transform: translate(-50%, -50%);
 }
-.colors .option:first-child.selected::before{
-    border-color: #ccc;
+.colors .option:first-child.selected::before {
+  border-color: #ccc;
 }
-.option #color-picker{
-    opacity: 0;
-    cursor: pointer;
+.option #color-picker {
+  opacity: 0;
+  cursor: pointer;
 }
-.buttons button{
-    width: 100%;
-    color: #fff;
-    border: none;
-    outline: none;
-    padding: 11px 0;
-    font-size: 0.9rem;
-    margin-bottom: 13px;
-    background: none;
-    border-radius: 4px;
-    cursor: pointer;
+.buttons button {
+  width: 100%;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 11px 0;
+  font-size: 0.9rem;
+  margin-bottom: 13px;
+  background: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
-.buttons .clear-canvas{
-    color: #6c6c6c;
-    border: 1px solid #6c6c6c;
-    transition: all .3s ease;
+.buttons .clear-canvas {
+  color: #6c6c6c;
+  border: 1px solid #6c6c6c;
+  transition: all 0.3s ease;
 }
-.clear-canvas:hover{
-    color: #fff;
-    background-color: #6c6c6c;
+.clear-canvas:hover {
+  color: #fff;
+  background-color: #6c6c6c;
 }
-.buttons .save-img{
-    background-color: #4a98f7;
-    border: 1px solid #4a98f7;
+.buttons .save-img {
+  background-color: #4a98f7;
+  border: 1px solid #4a98f7;
 }
-.drawing-board{
-    flex: 1;
-    overflow: hidden;
+.drawing-board {
+  border-radius: 10px;
+  flex: 1;
+  overflow: hidden;
 }
-.drawing-board canvas{
-    width: 100%;
-    height: 100%;
+.drawing-board canvas {
+  width: 100%;
+  height: 100%;
 }
+.save-disabled {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin-right: 180px;
+  background-color: #3b8c66;
+  position: absolute;
+  width: 300px;
+  height: 60px;
+  z-index: 999999;
+  transition: all 1s ease;
+}
+.save-active {
+  transition: all 1s ease;
+
+}
+.save-active span {
+  transition: all 1s ease;
+
+  position: relative;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #fff;
+}
+.save-active span i {
+
+  margin: 3px 8px;
+}
+
+

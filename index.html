@@ -6,9 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Paint Web</title>
     <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script src="/js/script.js" defer></script>
   </head>
   <body>
+    <div class="save-disabled">
+      <div class="save-active">
+      <span>Saqlandi <i class="fa-solid fa-check"></i></span>
+    </div>
+    </div>
+
     <div class="container">
       <section class="drawing-board">
         <canvas></canvas>
@@ -59,13 +72,18 @@
             <li class="option"></li>
             <li class="option"></li>
             <li class="option">
-                <input type="color" name="color" id="color-picker" value="#4a98f7">
+              <input
+                type="color"
+                name="color"
+                id="color-picker"
+                value="#4a98f7"
+              />
             </li>
           </ul>
         </div>
         <div class="row buttons">
-            <button class="clear-canvas">O'chirish</button>
-            <button class="save-img">Saqlash</button>
+          <button class="clear-canvas">O'chirish</button>
+          <button class="save-img">Saqlash</button>
         </div>
       </section>
     </div>

@@ -4,7 +4,10 @@ const canvas = document.querySelector("canvas"),
   fillColor = document.querySelector("#fill-color"),
   sizeSlide = document.querySelector("#size-slider"),
   colorBtns = document.querySelectorAll(".colors .option"),
-  colorPicker = document.querySelector("#color-picker");
+  colorPicker = document.querySelector("#color-picker"),
+  clearCanvasBtn = document.querySelector(".clear-canvas"),
+  saveImgBtn = document.querySelector(".save-img"),
+  saveDisabled = document.querySelector(".save-disabled");
 
 // VARIABLES
 let ctx = canvas.getContext("2d"),
@@ -16,10 +19,18 @@ let ctx = canvas.getContext("2d"),
   prewMouseY,
   snapshot;
 
+// SET CANVAS BACGROUND
+const setCanvasBg = () => {
+  ctx.fillStyle = "#fff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = selectedColor;
+};
+
 // CANVAS VARIABLES
 window.addEventListener("load", () => {
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
+  setCanvasBg();
 });
 
 // START DRAWING
@@ -75,6 +86,7 @@ const drawTriangle = (e) => {
 const drawing = (e) => {
   if (!isDrawing) return;
   ctx.putImageData(snapshot, 0, 0);
+
   switch (selectedTool) {
     case "brush":
       ctx.lineTo(e.offsetX, e.offsetY);
@@ -89,10 +101,35 @@ const drawing = (e) => {
     case "triangle":
       drawTriangle(e);
       break;
+    case "eraser":
+      ctx.strokeStyle = "#fff";
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+      break;
     default:
       break;
   }
 };
+
+// SAVE LIKE IMG
+saveImgBtn.addEventListener("click", (e) => {
+  const link = document.createElement("a");
+  link.download = `Proyekt Paint ${Date.now()}.jpg`;
+  link.href = canvas.toDataURL();
+  link.click();
+  if (e) {
+    saveDisabled.style.display = "flex";
+    setInterval(() => {
+      saveDisabled.style.display = "none";
+    }, 2000);
+  }
+});
+
+// CLEAR CANVAS BTN
+clearCanvasBtn.addEventListener("click", () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  setCanvasBg();
+});
 
 // CHANGE BRUSH WIDTH
 sizeSlide.addEventListener("change", () => (brushWidth = sizeSlide.value));
@@ -103,7 +140,6 @@ toolBtns.forEach((btn) => {
     selectedTool = btn.id;
     document.querySelector(".options .active").classList.remove("active");
     btn.classList.add("active");
-    console.log(`selected ${selectedTool}`);
   });
 });
 const stopDraw = () => {
@@ -123,10 +159,10 @@ colorBtns.forEach((btn) => {
 });
 
 // SET COLOR FROM PICKER
-colorPicker.addEventListener('change', ()=>{
-  colorPicker.parentElement.style.background = colorPicker.value
-  colorPicker.parentElement.click()
-})
+colorPicker.addEventListener("change", () => {
+  colorPicker.parentElement.style.background = colorPicker.value;
+  colorPicker.parentElement.click();
+});
 
 // DRAW EVENTS
 canvas.addEventListener("mousedown", startDraw);
